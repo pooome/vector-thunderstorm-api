@@ -67,7 +67,7 @@ exports.registerUser = (req, res, next) => {
                 userId: user[0]._id,
                 username: user[0].username
               },
-              "process.env.JWT_KEY", //should be env variable
+              process.env.JWT_KEY,
               {
                   expiresIn: "1h"
               }
