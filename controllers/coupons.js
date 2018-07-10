@@ -32,12 +32,9 @@ exports.getCoupons = (req, res, next) => {
 exports.getCouponsByStore = (req, res, next) => {
 
     const sensorId = req.body.sensorId;
-    const uuid = req.body.uuid;
-    const major = req.body.major;
-    const minor = req.body.minor;
 
-    if (!sensorId || !uuid || !major || !minor) {
-        res.status(400).send('sensorId, uuid, major, and minor are required keys in the body')
+    if (!sensorId) {
+        res.status(400).json({err: 'sensorId is required'})
     }
 
     Coupon.find({
