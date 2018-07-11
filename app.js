@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+var cors = require('cors')
 const dotEnv = require('dotenv').config()
 
 var indexRouter = require('./routes/index');
@@ -15,27 +15,27 @@ mongoose.connect('mongodb://admin:honeywell2018@ds233061.mlab.com:33061/vector-t
 
 var app = express();
 
+app.use(cors())
+
 // allowing cors
-app.use((req, res, next) => {
-  res.header('Access-Controll-Allow-Origin', '*');
-  res.header('Access-Controll-Allow-Headers', '*');
-  if (req.method == 'OPTIONS') {
-      res.header('Access-Controll-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-      return res.status(200).json({});
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Controll-Allow-Origin', '*');
+//   res.header('Access-Controll-Allow-Headers', '*');
+//   if (req.method == 'OPTIONS') {
+//       res.header('Access-Controll-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+//       return res.status(200).json({});
+//   }
+//   next();
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({limit: '5mb'}));
+app.use(express.urlencoded({limit: '5mb', extended: false }));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

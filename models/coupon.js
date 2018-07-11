@@ -6,7 +6,7 @@ const couponSchema = mongoose.Schema({
     description: { type: String, required: true },
     expiration: { type: Number, required: true },
     qrCode: { type: String, required: true },
-    imageUrl: { type: String, required: false }
+    imageUrl: { type: String, required: true }
 });
 
  module.exports = mongoose.model('Coupon', couponSchema); 

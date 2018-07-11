@@ -64,16 +64,18 @@ exports.getCouponsByStore = (req, res, next) => {
 
 };
 
-//handling creating a new product (must be signed in)
 exports.createCoupon = (req, res, next) => {
+    
     const coupon = new Coupon({
         sensorId: req.body.sensorId,
         storeName: req.body.storeName,
         description: req.body.description,
         expiration: req.body.expiration,
         qrCode: req.body.qrCode,
-        imageUrl: req.file.path,
+        imageUrl: req.body.imageUrl
     });
+
+    //req.file.path,
 
     coupon
         .save()
@@ -97,6 +99,8 @@ exports.createCoupon = (req, res, next) => {
             });
         });
 };
+
+
 
 //TODO: delete coupon
 

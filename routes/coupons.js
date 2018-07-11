@@ -7,7 +7,9 @@ var router = express.Router();
 
 router.get('/all', CouponsController.getCoupons);
 
-router.post('/create', upload.single('imageUrl'), CouponsController.createCoupon);
+// router.post('/create', upload.single('imageUrl'), CouponsController.createCoupon);
+
+router.post('/create', CouponsController.createCoupon);
 
 router.post('/sensor', CouponsController.getCouponsByStore);
 
